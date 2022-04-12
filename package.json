@@ -1,0 +1,22 @@
+{
+  "name": "bot_v1",
+  "version": "1.0.0",
+  "description": "telegram bot version 1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BTCY/bot_v1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BTCY/bot_v1/issues"
+  },
+  "homepage": "https://github.com/BTCY/bot_v1#readme",
+  "dependencies": {
+    "telegraf": "^4.7.0"
+  }
+}
