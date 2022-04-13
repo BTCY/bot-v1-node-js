@@ -2,7 +2,6 @@ require('dotenv').config();
 const { Telegraf, Markup } = require('telegraf')
 const axios = require('axios');
 const jsdom = require("jsdom");
-const { JSDOM } = jsdom;
 
 const bot = new Telegraf(process.env.TELEGRAM_TOKEN, {})
 bot.start((ctx) => {
@@ -39,13 +38,24 @@ bot.command('w', async (ctx) => {
 })
 
 bot.command('p', async (ctx) => {
-    try {
-        var pikabu = (await axios.get(`https://pikabu.ru/story/zanimatelnaya_matematika_9017937`))
-        let dom = new JSDOM(pikabu);
-        // console.log(dom.window.document.querySelector("p")); 
-        ctx.replyWithHTML(dom);
+    const response = await axios.request({
+        method: 'GET',
+        url: 'https://pikabu.ru/story/zanimatelnaya_matematika_9017937',
+        responseType: 'arraybuffer',
+        responseEncoding: 'binary'
+    });
 
-    } catch (e) { console.log(e) }
+    const decoder = new TextDecoder('windows-1251');
+    let html = decoder.decode(response.data)
+
+    // console.log(html)
+    // const resp = await axios.get('https://pikabu.ru/story/zanimatelnaya_matematika_9017937', { responseEncoding: 'utf8' })
+    const dom = new jsdom.JSDOM(html)
+    const elementTitle = dom.window.document.querySelector('span.story__title-link').textContent
+    const elementImg = dom.window.document.querySelector('.story-image__content > a').getAttribute('href')
+    if (elementTitle) {
+        ctx.replyWithHTML(`<b>${elementTitle}</b>${elementImg}`)
+    }
 })
 
 
