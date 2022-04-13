@@ -1,6 +1,8 @@
 require('dotenv').config();
 const { Telegraf, Markup } = require('telegraf')
 const axios = require('axios');
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
 
 const bot = new Telegraf(process.env.TELEGRAM_TOKEN, {})
 bot.start((ctx) => {
@@ -33,6 +35,16 @@ bot.command('w', async (ctx) => {
         } else {
             ctx.reply("Данные не найдены");
         }
+    } catch (e) { console.log(e) }
+})
+
+bot.command('p', async (ctx) => {
+    try {
+        var pikabu = (await axios.get(`https://pikabu.ru/story/zanimatelnaya_matematika_9017937`))
+        let dom = new JSDOM(pikabu);
+        // console.log(dom.window.document.querySelector("p")); 
+        ctx.replyWithHTML(dom);
+
     } catch (e) { console.log(e) }
 })
 
