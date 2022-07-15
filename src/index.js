@@ -94,24 +94,27 @@ bot.command('p', async (ctx) => {
     if (elementTitle) {
         ctx.replyWithHTML(`<b>${elementTitle}</b>${elementImg}`)
     }
-})
+});
 
 bot.command('/drink', async (ctx) => {
     const time = 1657893600
     const currentTime = new Date().getTime() / 1000;
     const result = time - currentTime;
     let text = `${parseInt(result / 60 / 60)}:${parseInt(result / 60 % 60)}:${parseInt(result % 60)}`
-    ctx.replyWithHTML(`Пьем через:  <b>${text}</b>`)
-})
+    if (result > 0)
+        ctx.replyWithHTML(`Пьем через:  <b>${text}</b>`)
+    else
+        ctx.replyWithHTML(`<b>Пьянка прошла! Теперь вспоминайте ее и плачьте 🤡</b>`)
+});
 
-bot.hears('ты че пес', (ctx) => {
-    // if (ctx.update.message.text.toLowerCase().includes('ты че пес')
-    //     || ctx.update.message.text.toLowerCase().includes('ты че пёс')
-    //     || ctx.update.message.text.toLowerCase().includes('ты че, пёс')
-    //     || ctx.update.message.text.toLowerCase().includes('ты че, пес')
-    // )
+bot.on('message', (ctx) => {
+    if (ctx.update.message.text.toLowerCase().includes('ты че пес')
+        || ctx.update.message.text.toLowerCase().includes('ты че пёс')
+        || ctx.update.message.text.toLowerCase().includes('ты че, пёс')
+        || ctx.update.message.text.toLowerCase().includes('ты че, пес')
+    )
         return ctx.reply('Гав!')
-})
+});
 
 bot.launch()
 
