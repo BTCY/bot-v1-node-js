@@ -108,26 +108,34 @@ bot.command('/drink', async (ctx) => {
 });
 
 bot.on('message', (ctx) => {
-    if (ctx.update.message.text.toLowerCase().includes('ты че пес')
-        || ctx.update.message.text.toLowerCase().includes('ты че пёс')
-        || ctx.update.message.text.toLowerCase().includes('ты че, пёс')
-        || ctx.update.message.text.toLowerCase().includes('ты че, пес')
+    let message = ctx.update.message.text.toLowerCase();
+    if (message.includes('ты че пес')
+        || message.includes('ты че пёс')
+        || message.includes('ты че, пёс')
+        || message.includes('ты че, пес')
+        || message.includes('ты пес')
+        || message.includes('ты, пес')
+        || message.includes('ты пёс')
+        || message.includes('ты, пёс')
+        || message.includes('пёс')
+        || message.includes('пес')
+        || message.includes('псина')
     ) {
-        return ctx.reply('Гав!')
+        ctx.reply('Гав!')
     };
-    
-    if (ctx.update.message.text.toLowerCase().includes('ну че там')
-        || ctx.update.message.text.toLowerCase().includes('ну чё там')
-        || ctx.update.message.text.toLowerCase().includes('ну чо там')
+
+    if (message.includes('ну че там')
+        || message.includes('ну чё там')
+        || message.includes('ну чо там')
     ) {
         const time = 1657893600
         const currentTime = new Date().getTime() / 1000;
         const result = time - currentTime;
         let text = `${parseInt(result / 60 / 60)}:${parseInt(result / 60 % 60)}:${parseInt(result % 60)}`
         if (result > 0)
-            return ctx.replyWithHTML(`Еще <b>${text}</b> до бухыча`)
+            ctx.replyWithHTML(`Еще <b>${text}</b> до бухыча`)
         else
-            return ctx.replyWithHTML(`<b>А все</b>`)
+            ctx.replyWithHTML(`<b>А все</b>`)
     }
 });
 
