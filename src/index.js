@@ -112,8 +112,23 @@ bot.on('message', (ctx) => {
         || ctx.update.message.text.toLowerCase().includes('ты че пёс')
         || ctx.update.message.text.toLowerCase().includes('ты че, пёс')
         || ctx.update.message.text.toLowerCase().includes('ты че, пес')
-    )
+    ) {
         return ctx.reply('Гав!')
+    };
+    
+    if (ctx.update.message.text.toLowerCase().includes('ну че там')
+        || ctx.update.message.text.toLowerCase().includes('ну чё там')
+        || ctx.update.message.text.toLowerCase().includes('ну чо там')
+    ) {
+        const time = 1657893600
+        const currentTime = new Date().getTime() / 1000;
+        const result = time - currentTime;
+        let text = `${parseInt(result / 60 / 60)}:${parseInt(result / 60 % 60)}:${parseInt(result % 60)}`
+        if (result > 0)
+            return ctx.replyWithHTML(`Еще <b>${text}</b> до бухыча`)
+        else
+            return ctx.replyWithHTML(`<b>А все</b>`)
+    }
 });
 
 bot.launch()
