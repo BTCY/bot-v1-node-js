@@ -137,6 +137,10 @@ bot.on('message', (ctx) => {
         else
             ctx.replyWithHTML(`<b>А все</b>`)
     }
+
+    if (message.includes('смейся')) {
+        ctx.replyWithHTML(`ха-ха, ебать ты смешной 🤡`)
+    }
 });
 
 bot.launch()
