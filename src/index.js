@@ -1,9 +1,12 @@
 require('dotenv').config();
 const { Telegraf, Markup } = require('telegraf')
-const axios = require('axios');
-const jsdom = require("jsdom");
+import axios from 'axios';
+import jsdom from 'jsdom';
+import { getTimer } from './modules/timer.js'
 
 const bot = new Telegraf(process.env.TELEGRAM_TOKEN, {})
+
+const eventTimestamp = 1689343200000;
 
 bot.start((ctx) => {
     try {
@@ -97,14 +100,15 @@ bot.command('p', async (ctx) => {
 });
 
 bot.command('/drink', async (ctx) => {
-    const time = 1657893600
-    const currentTime = new Date().getTime() / 1000;
-    const result = time - currentTime;
-    let text = `${parseInt(result / 60 / 60)}:${parseInt(result / 60 % 60)}:${parseInt(result % 60)}`
-    if (result > 0)
-        ctx.replyWithHTML(`Пьем через:  <b>${text}</b>`)
-    else
+    let timerText = getTimer(eventTimestamp);
+    if (timerText === false)
         ctx.replyWithHTML(`<b>Пьянка прошла! Теперь вспоминайте ее и плачьте 🤡</b>`)
+    else
+        ctx.replyWithHTML(`Пьем через:  <b>${timerText}</b>`)
+});
+
+bot.command('/help', async (ctx) => {
+    ctx.replyWithHTML(`<b>Сам себе помоги!</b>`)
 });
 
 bot.on('message', (ctx) => {
@@ -128,18 +132,16 @@ bot.on('message', (ctx) => {
         || message.includes('ну чё там')
         || message.includes('ну чо там')
     ) {
-        const time = 1657893600
-        const currentTime = new Date().getTime() / 1000;
-        const result = time - currentTime;
-        let text = `${parseInt(result / 60 / 60)}:${parseInt(result / 60 % 60)}:${parseInt(result % 60)}`
-        if (result > 0)
-            ctx.replyWithHTML(`Еще <b>${text}</b> до бухыча`)
-        else
-            ctx.replyWithHTML(`<b>А все</b>`)
-    }
 
-    if (message.includes('смейся')) {
-        ctx.replyWithHTML(`ха-ха, ебать ты смешной 🤡`)
+        let timerText = getTimer(eventTimestamp);
+        if (timerText === false)
+            ctx.replyWithHTML(`<b>А все</b>`);
+        else
+            ctx.replyWithHTML(`Еще <b>${timerText}</b> до бухыча`);
+
+        if (message.includes('смейся')) {
+            ctx.replyWithHTML(`ха-ха, ебать ты смешной 🤡`);
+        }
     }
 });
 
