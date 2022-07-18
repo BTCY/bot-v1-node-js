@@ -58,7 +58,6 @@ bot.command('w', async (ctx) => {
         var weather_data = (await axios.get(`${process.env.WEATHER_SERVICE_API_URL}${location}`)).data
         if (weather_data.error === null && weather_data.result.length !== 0) {
             var data = weather_data.result[0];
-            console.log(data);
             ctx.replyWithHTML
                 (`
 <b>${cityName} - прогноз погоды</b>
