@@ -1,18 +1,18 @@
 require('dotenv').config();
 const { Telegraf, Markup } = require('telegraf')
+var validator = require('validator');
+import Datastore from 'nedb';
 import axios from 'axios';
 import jsdom from 'jsdom';
 import { getTimer } from './modules/timer.js'
 
 const bot = new Telegraf(process.env.TELEGRAM_TOKEN, {})
 
-const eventTimestamp = 1689343200000;
-
 bot.start((ctx) => {
     try {
         ctx.replyWithHTML(`<b>Привет, ${ctx.message.chat.first_name} 👋👋</b>\n\nБот успешно запущен.`)
     } catch (e) { }
-})
+});
 
 
 bot.on('sticker', (ctx) => ctx.reply('👍'))
@@ -29,9 +29,10 @@ bot.command('/comands', async (ctx) => {
 
 <b>ТАЙМЕРЫ</b>
 /drink - когда следующая пьянка
+/set_drink - установить даду следующей пьянки в формате дд.мм.ггг чч.мм (прим. 31.12.2024 21:00)
 
 <b>РАЗВЛЕЧЕНИЯ</b>
-/p - случайны пост с Pikabu
+/p - показывает самый лучший пост Пикабу
 `)
     } catch (e) {
         console.log(e)
@@ -100,11 +101,37 @@ bot.command('p', async (ctx) => {
 });
 
 bot.command('/drink', async (ctx) => {
-    let timerText = getTimer(eventTimestamp);
-    if (timerText === false)
-        ctx.replyWithHTML(`<b>Пьянка прошла! Теперь вспоминайте ее и плачьте 🤡</b>`)
-    else
-        ctx.replyWithHTML(`Пьем через:  <b>${timerText}</b>`)
+    var db = new Datastore({ filename: './src/db/timer', autoload: true });
+    db.loadDatabase();
+
+    db.find({ key: 'eventTimestamp' }, function (err, eventTimestamp) {
+        if (!eventTimestamp)
+            ctx.replyWithHTML(`Ошибка`)
+        else {
+            let timerText = getTimer(eventTimestamp[0].value);
+            if (timerText === false)
+                ctx.replyWithHTML(`<b>Пьянка прошла! Теперь вспоминайте ее и плачьте 🤡</b>`)
+            else
+                ctx.replyWithHTML(`Пьем через:  <b>${timerText}</b>`)
+        }
+    });
+});
+
+bot.command('/set_drink', async (ctx) => {
+    var dateReg = /^\d{2}([.])\d{2}\1\d{4}([ ])\d{2}([:])\d{2}$/
+    let [first, ...rest] = ctx.update.message.text.split(' ');
+    let newEventTimestamp = rest.join(' ') || undefined;
+    if (!!newEventTimestamp && dateReg.test(newEventTimestamp)) {
+        var db = new Datastore({ filename: './src/db/timer', autoload: true });
+        db.loadDatabase();
+        ctx.replyWithHTML(`OK`)
+        // db.insert({ key: 'eventTimestamp', value: newEventTimestamp });
+        db.update({ key: 'eventTimestamp' }, { key: 'eventTimestamp', value: newEventTimestamp }, {});
+    }
+    else {
+        ctx.replyWithHTML(`https://sun6-23.userapi.com/impg/0RBbNd1XIddiS6-t7ZDzutrIlUT_XHikLx5a6g/Kk2absAFwYg.jpg?size=604x484&quality=96&sign=cb51229e8451439c9fbff803598c4de8&type=album`)
+        ctx.replyWithHTML(`<b>ОШИБКА</b>\nНеправильный формат даты / времени. Правильный формат - дд.мм.ггг чч.мм (прим. 31.12.2024 21:00)`)
+    }
 });
 
 bot.command('/help', async (ctx) => {
@@ -132,16 +159,20 @@ bot.on('message', (ctx) => {
         || message.includes('ну чё там')
         || message.includes('ну чо там')
     ) {
+        var db = new Datastore({ filename: './src/db/timer', autoload: true });
+        db.loadDatabase();
 
-        let timerText = getTimer(eventTimestamp);
-        if (timerText === false)
-            ctx.replyWithHTML(`<b>А все</b>`);
-        else
-            ctx.replyWithHTML(`Еще <b>${timerText}</b> до бухыча`);
-
-        if (message.includes('смейся')) {
-            ctx.replyWithHTML(`ха-ха, ебать ты смешной 🤡`);
-        }
+        db.find({ key: 'eventTimestamp' }, function (err, eventTimestamp) {
+            if (!eventTimestamp)
+                ctx.replyWithHTML(`Ошибка`)
+            else {
+                let timerText = getTimer(eventTimestamp[0].value);
+                if (timerText === false)
+                    ctx.replyWithHTML(`<b>А все</b>`);
+                else
+                    ctx.replyWithHTML(`Ещё <b>${timerText}</b> до бухыча`);
+            }
+        });
     }
 });
 

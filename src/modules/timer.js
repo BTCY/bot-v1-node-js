@@ -1,8 +1,18 @@
 import * as dateFns from 'date-fns';
 import ru from 'date-fns/locale/ru';
 
-export const getTimer = (eventTimestamp) => {
+export const getTimer = (eventDateTime) => {
     let currentTimestamp = new Date().getTime();
+    let eventDate = eventDateTime.split(' ')[0].split('.')
+    let eventTime = eventDateTime.split(' ')[1].split(':')
+    let eventTimestamp = new
+        Date(
+            eventDate[2],
+            +eventDate[1] - 1,
+            eventDate[0],
+            eventTime[0],
+            eventTime[1],
+        ).getTime();
     let comparisonResult = eventTimestamp - currentTimestamp;
 
     if (comparisonResult > 0) {
