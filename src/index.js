@@ -58,7 +58,26 @@ bot.command('w', async (ctx) => {
         var weather_data = (await axios.get(`${process.env.WEATHER_SERVICE_API_URL}${location}`)).data
         if (weather_data.error === null && weather_data.result.length !== 0) {
             var data = weather_data.result[0];
-            ctx.replyWithHTML(`<b>${cityName} - прогноз погоды</b>\n\nТемпература: <b>${data.current.temperature} °C</b>\nОщущается как: <b>${data.current.feelslike} °C</b>`);
+            console.log(data);
+            ctx.replyWithHTML
+                (`
+<b>${cityName} - прогноз погоды</b>
+
+Сейчас
+-----------------------------------------------------
+температура: <b>${data.current.temperature} °C</b>
+ощущается как: <b>${data.current.feelslike} °C</b>
+влажность: <b>${data.current.humidity} %</b>
+скорость ветра: <b>${data.current.winddisplay}</b>
+примечания: ${(data.current.skytext).toLowerCase()}
+-----------------------------------------------------
+
+Завтра
+-----------------------------------------------------
+температура: <b>от ${data.forecast[2].low} до ${data.forecast[2].high} °C</b>
+вероятность осадков: <b>${data.forecast[2].precip} %</b> 
+-----------------------------------------------------
+`);
         } else {
             ctx.reply("Данные не найдены");
         }
@@ -72,7 +91,25 @@ bot.command('w_yagul', async (ctx) => {
         var weather_data = (await axios.get(`${process.env.WEATHER_SERVICE_API_URL}${location}`)).data
         if (weather_data.error === null && weather_data.result.length !== 0) {
             var data = weather_data.result[0];
-            ctx.replyWithHTML(`<b>Ягул - прогноз погоды</b>\n\nТемпература: <b>${data.current.temperature} °C</b>\nОщущается как: <b>${data.current.feelslike} °C</b>`);
+            ctx.replyWithHTML
+                (`
+<b>Ягул - прогноз погоды</b>
+
+Сейчас
+-----------------------------------------------------
+температура: <b>${data.current.temperature} °C</b>
+ощущается как: <b>${data.current.feelslike} °C</b>
+влажность: <b>${data.current.humidity} %</b>
+скорость ветра: <b>${data.current.winddisplay}</b>
+примечания: ${(data.current.skytext).toLowerCase()}
+-----------------------------------------------------
+
+Завтра
+-----------------------------------------------------
+температура: <b>от ${data.forecast[2].low} до ${data.forecast[2].high} °C</b>
+вероятность осадков: <b>${data.forecast[2].precip} %</b> 
+-----------------------------------------------------
+`);
         } else {
             ctx.reply("Данные не найдены");
         }
