@@ -7,6 +7,7 @@ import { getWeather } from './modules/weather';
 import { getRandomPikabuPost } from './modules/pikabu';
 import { getHelp } from './modules/help';
 import { getEmoji } from './modules/emoji';
+import { getNewsList } from './modules/news';
 
 const bot = new Telegraf(process.env.TELEGRAM_TOKEN, {})
 
@@ -60,6 +61,13 @@ bot.command('drink', (ctx) => getDrink(ctx));
 *   Модуль /modules/drink.js
 */
 bot.command('set_drink', (ctx) => setDrink(ctx));
+
+
+/*
+*   Возвращает список новостей.
+*   Модуль /modules/news.js
+*/
+bot.command('news', async (ctx) => await getNewsList(ctx));
 
 
 /*
