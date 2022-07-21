@@ -63,19 +63,17 @@ bot.command('w', async (ctx) => {
 <b>${cityName} - прогноз погоды</b>
 
 Сейчас
------------------------------------------------------
+------------
 температура: <b>${data.current.temperature} °C</b>
 ощущается как: <b>${data.current.feelslike} °C</b>
 влажность: <b>${data.current.humidity} %</b>
 скорость ветра: <b>${data.current.winddisplay}</b>
 примечания: ${(data.current.skytext).toLowerCase()}
------------------------------------------------------
 
 Завтра
------------------------------------------------------
+------------
 температура: <b>от ${data.forecast[2].low} до ${data.forecast[2].high} °C</b>
-вероятность осадков: <b>${data.forecast[2].precip} %</b> 
------------------------------------------------------
+вероятность осадков: <b>${data.forecast[2].precip} %</b>
 `);
         } else {
             ctx.reply("Данные не найдены");
@@ -95,19 +93,17 @@ bot.command('w_yagul', async (ctx) => {
 <b>Ягул - прогноз погоды</b>
 
 Сейчас
------------------------------------------------------
+------------
 температура: <b>${data.current.temperature} °C</b>
 ощущается как: <b>${data.current.feelslike} °C</b>
 влажность: <b>${data.current.humidity} %</b>
 скорость ветра: <b>${data.current.winddisplay}</b>
 примечания: ${(data.current.skytext).toLowerCase()}
------------------------------------------------------
 
 Завтра
------------------------------------------------------
+------------
 температура: <b>от ${data.forecast[2].low} до ${data.forecast[2].high} °C</b>
-вероятность осадков: <b>${data.forecast[2].precip} %</b> 
------------------------------------------------------
+вероятность осадков: <b>${data.forecast[2].precip} %</b>
 `);
         } else {
             ctx.reply("Данные не найдены");
