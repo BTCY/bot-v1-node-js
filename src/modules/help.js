@@ -23,6 +23,7 @@ export const getHelp = (ctx) => {
 /news <i>[источник]</i> - список новостей с определенного источника
     r   - rambler
     m - mail
+/rub - курс рубля
 `)
 };
 

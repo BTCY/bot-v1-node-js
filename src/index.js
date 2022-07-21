@@ -8,6 +8,7 @@ import { getRandomPikabuPost } from './modules/pikabu';
 import { getHelp } from './modules/help';
 import { getEmoji } from './modules/emoji';
 import { getNewsList } from './modules/news';
+import { getExchangeRate } from './modules/exchangeRate';
 
 const bot = new Telegraf(process.env.TELEGRAM_TOKEN, {})
 
@@ -68,6 +69,13 @@ bot.command('set_drink', (ctx) => setDrink(ctx));
 *   Модуль /modules/news.js
 */
 bot.command('news', async (ctx) => await getNewsList(ctx));
+
+
+/*
+*   Возвращает курс рубля.
+*   Модуль /modules/exchangeRate.js
+*/
+bot.command('rub', async (ctx) => await getExchangeRate(ctx));
 
 
 /*
