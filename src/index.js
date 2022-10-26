@@ -1,6 +1,6 @@
 require('dotenv').config();
 import { Telegraf } from 'telegraf';
-import { getDrink, setDrink } from './modules/event';
+import { getEvent, setEvent } from './modules/event';
 import { getTalk } from './modules/talk';
 import { getWeather } from './modules/weather';
 import { getRandomPikabuPost } from './modules/pikabu';
