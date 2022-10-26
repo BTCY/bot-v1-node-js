@@ -3,7 +3,7 @@ import jsdom from 'jsdom';
 
 
 /*
-*   Возвращает случайны пост с Pikabu. 
+*   Get a random post from Pikabu (TODO). 
 */
 export const getRandomPikabuPost = async (ctx) => {
     const response = await axios.request({

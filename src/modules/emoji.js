@@ -1,6 +1,6 @@
 
 /*
-*   Emoji: нравится
+*   Emoji: like
 */
 export const like = (ctx) => {
     ctx.reply('👍');
@@ -8,7 +8,7 @@ export const like = (ctx) => {
 
 
 /*
-*   Главная функция вызова emoji.
+*   The main function of calling emotions.
 */
 export const getEmoji = (ctx) => {
     like(ctx);

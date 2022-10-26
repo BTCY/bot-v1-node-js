@@ -45,10 +45,10 @@ bot.command('w_yagul', async (ctx) => await getWeather(ctx, 'Yagul'));
 
 
 /*
-*   Get a parsed site (in development).
+*   Get a random post from Pikabu (TODO).
 *   Module /modules/pikabu.js
 */
-bot.command('p', async (ctx) => await getRandomPikabuPost(ctx));
+bot.command('pikabu', async (ctx) => await getRandomPikabuPost(ctx));
 
 
 /*

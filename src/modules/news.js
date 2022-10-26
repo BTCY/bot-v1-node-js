@@ -7,7 +7,7 @@ const SOURCES_LIST = {
 
 
 /*
-*   Возвращает список новостей.
+*   Get a list of news.
 */
 export const getNewsList = async (ctx) => {
     let command = ctx.update.message.text.split(' ');

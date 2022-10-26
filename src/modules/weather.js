@@ -2,7 +2,7 @@ require('dotenv').config();
 import axios from 'axios';
 
 /*
-*   Возвращает шаблон сообщения прогноза погоды.
+*   Template message the weather forecast.
 */
 const messageTemplate = (data, cityName) => {
     return (`
@@ -25,7 +25,7 @@ const messageTemplate = (data, cityName) => {
 
 
 /*
-*   Возвращает прогноз погоды.
+*   Get the weather forecast.
 */
 export const getWeather = async (ctx, constCity = undefined) => {
     let location = undefined;
