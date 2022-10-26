@@ -1,6 +1,6 @@
 
 /*
-*   Возвращает справку по боту и командам. 
+*   Get help for the bot and commands. 
 */
 export const getHelp = (ctx) => {
     ctx.replyWithHTML(`

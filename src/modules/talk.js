@@ -38,7 +38,7 @@ export const whatsUpThere = (ctx) => {
 
 
 /*
-*   Главная функция вызова диалогов.
+*   The main function of calling dialogs.
 */
 export const getTalk = (ctx) => {
     let message = ctx.update.message.text.toLowerCase();

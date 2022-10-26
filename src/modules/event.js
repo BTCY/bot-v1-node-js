@@ -3,7 +3,7 @@ import { getTimeBeforeEvent } from '../common/getTimeBeforeEvent';
 
 
 /*
-*   Возвращает сколько осталось до следующей пьянки.
+*   Get how much time is left before the set event.
 */
 export const getEvent = (ctx) => {
     var db = new Datastore({ filename: './src/db/event', autoload: true });
@@ -17,14 +17,14 @@ export const getEvent = (ctx) => {
             if (timerText === false)
                 ctx.replyWithHTML(`<b>Событие прошло!</b>`);
             else
-                ctx.replyWithHTML(`До осталось <b>${timerText}</b>`);
+                ctx.replyWithHTML(`До события осталось <b>${timerText}</b>`);
         };
     });
 };
 
 
 /*
-*   Устанавливает дату следующей пьянки.
+*    Set the date of the event.
 */
 export const setEvent = (ctx) => {
     var dateReg = /^\d{2}([.])\d{2}\1\d{4}([ ])\d{2}([:])\d{2}$/;
