@@ -1,7 +1,6 @@
 require('dotenv').config();
-const { Telegraf, Markup } = require('telegraf');
-// var validator = require('validator'); 
-import { getDrink, setDrink } from './modules/drink';
+import { Telegraf } from 'telegraf';
+import { getDrink, setDrink } from './modules/event';
 import { getTalk } from './modules/talk';
 import { getWeather } from './modules/weather';
 import { getRandomPikabuPost } from './modules/pikabu';
@@ -14,8 +13,9 @@ const bot = new Telegraf(process.env.TELEGRAM_TOKEN, {})
 
 bot.start((ctx) => {
     try {
-        ctx.replyWithHTML(`<b>Привет, ${ctx.message.chat.first_name} 👋👋</b>\n\nБот успешно запущен.`);
-    } catch (e) { }
+        ctx.replyWithHTML(`<b>${ctx.message.chat.first_name} 👋👋</b>`);
+    }
+    catch (e) { }
 });
 
 /*
@@ -24,70 +24,70 @@ bot.start((ctx) => {
 
 
 /*
-*   Возвращает справку по боту и командам.
-*   Модуль /modules/help.js
+*   Get help on bot commands.
+*   Module /modules/help.js
 */
 bot.command('help', (ctx) => getHelp(ctx))
 
 
 /*
-*   Возвращает прогноз погоды.
-*   Модуль /modules/weather.js
+*   Get the weather forecast.
+*   Module /modules/weather.js
 */
 bot.command('w', async (ctx) => await getWeather(ctx));
 
 
 /*
-*   Возвращает прогноз погоды для Ягул.
-*   Модуль /modules/weather.js
+*   Get the weather forecast for Yagul.
+*   Module /modules/weather.js
 */
 bot.command('w_yagul', async (ctx) => await getWeather(ctx, 'Yagul'));
 
 
 /*
-*   Возвращает случайны пост с Pikabu.
-*   Модуль /modules/pikabu.js
+*   Get a parsed site (in development).
+*   Module /modules/pikabu.js
 */
 bot.command('p', async (ctx) => await getRandomPikabuPost(ctx));
 
 
 /*
-*   Возвращает сколько осталось до следующей пьянки.
-*   Модуль /modules/drink.js
+*   Get how much time is left before the set event (in setEvent()).
+*   Module /modules/event.js
 */
-bot.command('drink', (ctx) => getDrink(ctx));
+bot.command('event', (ctx) => getEvent(ctx));
 
 /*
-*   Устанавливает дату следующей пьянки.
-*   Модуль /modules/drink.js
+*   Set the date of the event.
+*   Module /modules/event.js
 */
-bot.command('set_drink', (ctx) => setDrink(ctx));
+bot.command('set_event', (ctx) => setEvent(ctx));
 
 
 /*
-*   Возвращает список новостей.
-*   Модуль /modules/news.js
+*   Get the news list.
+*   Module /modules/news.js
 */
 bot.command('news', async (ctx) => await getNewsList(ctx));
 
 
 /*
-*   Возвращает курс рубля.
-*   Модуль /modules/exchangeRate.js
+*   Get exchange rate of the ruble.
+*   Module /modules/exchangeRate.js
 */
 bot.command('rub', async (ctx) => await getExchangeRate(ctx));
 
 
 /*
-*   Возвращает реакцию бота на стикеры и emoji.
-*   Модуль /modules/emoji.js
+*   Get the bot's reaction to stickers and emoji.
+*   Module /modules/emoji.js
 */
 bot.on('sticker', (ctx) => getEmoji(ctx));
 
 
 /*
-*   Возвращает реакцию бота на определенные диалоги (модуль разговоров).
-*   Модуль /modules/talk.js
+*   Get the bot's reaction to certain dialogs.
+*   Module /modules/talk.js
 */
 bot.on('message', (ctx) => getTalk(ctx));
 
