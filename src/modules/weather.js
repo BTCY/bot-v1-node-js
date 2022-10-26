@@ -1,7 +1,6 @@
 require('dotenv').config();
 import axios from 'axios';
 
-
 /*
 *   Возвращает шаблон сообщения прогноза погоды.
 */
