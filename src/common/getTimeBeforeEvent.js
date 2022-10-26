@@ -3,9 +3,9 @@ import ru from 'date-fns/locale/ru';
 
 
 /*
-*   Возвращает сколько осталось до события.
+*   Get how much is left before the event.
 */
-export const getTimer = (eventDateTime) => {
+export const getTimeBeforeEvent = (eventDateTime) => {
     let currentTimestamp = new Date().getTime();
     let eventDate = eventDateTime.split(' ')[0].split('.');
     let eventTime = eventDateTime.split(' ')[1].split(':');

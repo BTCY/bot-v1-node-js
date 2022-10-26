@@ -1,5 +1,5 @@
 import Datastore from 'nedb';
-import { getTimer } from '../common/getTimer';
+import { getTimeBeforeEvent } from '../common/getTimeBeforeEvent';
 
 
 /*
@@ -27,7 +27,7 @@ export const whatsUpThere = (ctx) => {
         if (!eventTimestamp)
             ctx.replyWithHTML(`Ошибка`);
         else {
-            let timerText = getTimer(eventTimestamp[0].value);
+            let timerText = getTimeBeforeEvent(eventTimestamp[0].value);
             if (timerText === false)
                 ctx.replyWithHTML(`<b>А все</b>`);
             else
