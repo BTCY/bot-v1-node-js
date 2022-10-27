@@ -20,7 +20,7 @@ const WHATS_UP_THERE =
     ['ну че там', 'ну чё там', 'ну чо там'];
 
 export const whatsUpThere = (ctx) => {
-    var db = new Datastore({ filename: './src/db/drink', autoload: true });
+    var db = new Datastore({ filename: './src/db/event', autoload: true });
     db.loadDatabase();
 
     db.find({ key: 'eventTimestamp' }, function (err, eventTimestamp) {
