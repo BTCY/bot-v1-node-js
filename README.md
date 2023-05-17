@@ -8,6 +8,9 @@
 ## About <a name = "about"></a>
 Test project with telegram bot.
 
+### Main Features
++ 
+
 ## Getting Started <a name = "getting_started"></a>
 These instructions will help you run a copy of the project on your local machine for development and testing purposes..
 
@@ -30,7 +33,12 @@ For the project to work, the following dependencies must be installed on your sy
     ```
     TELEGRAM_TOKEN="YOUR_TOKEN" 
     ```
- 5. Start the project
+ 5. [Optional] Create a OpenWeatherMap token — <a href="https://openweathermap.org/guide" target="_blank">Documentation</a>
+     + Add a OpenWeatherMap token to the .env file 
+        ```
+        WEATHER_SERVICE_TOKEN="YOUR_TOKEN" 
+        ```
+ 6. Start the project
     ```
     npm start 
     ```
