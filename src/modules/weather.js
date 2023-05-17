@@ -47,7 +47,7 @@ export const getWeather = async (ctx, constCity = undefined) => {
     };
 
     try {
-        var weather_data = (await axios.get(`${process.env.WEATHER_SERVICE_API_URL}${location}`)).data;
+        var weather_data = (await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.WEATHER_SERVICE_TOKEN}`)).data;
         if (weather_data.error === null && weather_data.result.length !== 0) {
             var data = weather_data.result[0];
             ctx.replyWithHTML(messageTemplate(data, cityName));
