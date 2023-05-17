@@ -1,4 +1,4 @@
-# Telegram Bot V1 (test project)
+# Telegram Bot V1
 
 ## Table of Contents
 + [About](#about)
@@ -9,15 +9,18 @@
 Test project with telegram bot.
 
 ### Main Features
-+ 
++ Reacting to some phrases
++ Setting and event reminder
++ Getting weather for the city
++ Reading rss news from different sources
++ Getting the exchange rate
++ Bot features help
 
 ## Getting Started <a name = "getting_started"></a>
 These instructions will help you run a copy of the project on your local machine for development and testing purposes..
 
 ### Prerequisites
-For the project to work, the following dependencies must be installed on your system.
-
-### Main dependencies
+For the project to work, the following dependencies must be installed on your system:
 + Node.JS and NPM — <a href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm" target="_blank">Documentation</a>
 + Nodemon — <a href="https://github.com/remy/nodemon" target="_blank">Documentation</a>
 
