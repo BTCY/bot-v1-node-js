@@ -9,7 +9,12 @@
 Test project with telegram bot.
 
 ### Main Features
-+ 
++ Reacting to some phrases
++ Setting and event reminder
++ Getting weather for the city
++ Reading rss news from different sources
++ Getting the exchange rate
++ Bot features help
 
 ## Getting Started <a name = "getting_started"></a>
 These instructions will help you run a copy of the project on your local machine for development and testing purposes..
