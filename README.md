@@ -36,4 +36,8 @@ For the project to work, the following dependencies must be installed on your sy
     ```
 
 ## Usage <a name = "usage"></a>
-Add notes about how to use the system.
+Go to telegram, find there the bot you created to which the specified API token is attached.
+Get a list of available commands by writing to it:
+```
+/help
+```
