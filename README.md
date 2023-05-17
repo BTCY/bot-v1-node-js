@@ -1,4 +1,4 @@
-# Telegram Bot V1 (test project)
+# Telegram Bot V1
 
 ## Table of Contents
 + [About](#about)
