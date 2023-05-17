@@ -17,7 +17,7 @@ The first version of the bot that provides various informational content. The bo
 + Bot features help
 
 ## Getting Started <a name = "getting_started"></a>
-These instructions will help you run a copy of the project on your local machine for development and testing purposes..
+These instructions will help you run a copy of the project on your local machine for development and testing purposes.
 
 ### Prerequisites
 For the project to work, the following dependencies must be installed on your system:
