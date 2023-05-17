@@ -6,7 +6,7 @@
 + [Usage](#usage) 
 
 ## About <a name = "about"></a>
-Test project with telegram bot.
+The first version of the bot that provides various informational content. The bot works on the framework <a href="https://github.com/telegraf/telegraf" target="_blank">Telegraf.js</a>.
 
 ### Main Features
 + Reacting to some phrases
