@@ -1,8 +1,11 @@
 {
   "name": "bot_v1",
   "version": "1.0.0",
-  "description": "telegram bot version 1",
+  "description": "Telegram bot version 1",
   "main": "index.js",
+  "private": true,
+  "author": "https://github.com/BTCY",
+  "license": "MIT",
   "scripts": {
     "start": "nodemon --exec babel-node src/index.js"
   },
@@ -10,8 +13,6 @@
     "type": "git",
     "url": "git+https://github.com/BTCY/bot_v1.git"
   },
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/BTCY/bot_v1/issues"
   },
