@@ -28,33 +28,26 @@ const messageTemplate = (data, cityName) => {
 *   Get the weather forecast.
 */
 export const getWeather = async (ctx, constCity = undefined) => {
-    let location = undefined;
     let [first, ...rest] = ctx.update.message.text.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1));
-    let city = rest.join(' ') || undefined;
-    let cityName = undefined;
+    let cityName = rest.join(' ') || undefined;
 
-    if (constCity === 'Yagul') {
-        location = 'Yagul';
-        cityName = 'Ягул';
+    if (!cityName) {
+        ctx.reply("Enter city name. Example: /w London");
     }
-    else if (!city) {
-        location = 'Izhevsk';
-        cityName = 'Ижевск';
-    }
-    else {
-        location = city;
-        cityName = city;
-    };
 
     try {
-        var weather_data = (await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.WEATHER_SERVICE_TOKEN}`)).data;
-        if (weather_data.error === null && weather_data.result.length !== 0) {
+        var weather_data = (await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${process.env.WEATHER_SERVICE_TOKEN}`)).data;
+        console.log(weather_data)
+        if (!weather_data?.main) {
             var data = weather_data.result[0];
             ctx.replyWithHTML(messageTemplate(data, cityName));
         } else {
-            ctx.reply("Данные не найдены");
+            ctx.reply(`No weather data found for ${cityName}`);
         }
-    } catch (e) { console.log(e) }
+    } catch (e) {
+        console.log(e);
+        ctx.reply("An error occurred while loading data. Try later.")
+    }
 };
 
 
