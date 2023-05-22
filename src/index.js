@@ -3,7 +3,6 @@ import { Telegraf } from 'telegraf';
 import { getEvent, setEvent } from './modules/event';
 import { getTalk } from './modules/talk';
 import { getWeather } from './modules/weather';
-import { getRandomPikabuPost } from './modules/pikabu';
 import { getHelp } from './modules/help';
 import { getEmoji } from './modules/emoji';
 import { getNewsList } from './modules/news';
@@ -35,21 +34,6 @@ bot.command('help', (ctx) => getHelp(ctx))
 *   Module /modules/weather.js
 */
 bot.command('w', async (ctx) => await getWeather(ctx));
-
-
-/*
-*   Get the weather forecast for Yagul.
-*   Module /modules/weather.js
-*/
-bot.command('w_yagul', async (ctx) => await getWeather(ctx, 'Yagul'));
-
-
-/*
-*   Get a random post from Pikabu (TODO).
-*   Module /modules/pikabu.js
-*/
-bot.command('pikabu', async (ctx) => await getRandomPikabuPost(ctx));
-
 
 /*
 *   Get how much time is left before the set event (in setEvent()).
