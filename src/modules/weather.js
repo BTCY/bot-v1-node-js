@@ -1,25 +1,24 @@
-require('dotenv').config();
-import axios from 'axios';
+import { getWeatherService } from "../api/weather-service";
 
 /*
 *   Template message the weather forecast.
 */
 const messageTemplate = (data, cityName) => {
     return (`
-<b>${cityName} - прогноз погоды</b>
-
-Сейчас
+<b>${cityName} — weather forecast</b> 
+${data?.weather[0]?.description} 
+ 
+now: <b>${data.main.temp} °C</b>
+feels: <b>${data.main.feels_like} °C</b>
+max: <b>${data.main.temp_min} °C</b>
+min:  <b>${data.main.temp_max} °C</b>  
 ------------
-температура: <b>${data.current.temperature} °C</b>
-ощущается как: <b>${data.current.feelslike} °C</b>
-влажность: <b>${data.current.humidity} %</b>
-скорость ветра: <b>${data.current.winddisplay}</b>
-примечания: ${(data.current.skytext).toLowerCase()}
+pressure: <b>${data.main.pressure} hPa</b>
+humidity: <b>${data.main.humidity} %</b>
+visibility:   <b>${data.visibility} meter</b>
+wind: <b>${data.wind.speed} meter/sec</b>
 
-Завтра
-------------
-температура: <b>от ${data.forecast[2].low} до ${data.forecast[2].high} °C</b>
-вероятность осадков: <b>${data.forecast[2].precip} %</b>
+upd: ${new Date(data.dt * 1000).toLocaleString()}
 `)
 };
 
@@ -27,26 +26,25 @@ const messageTemplate = (data, cityName) => {
 /*
 *   Get the weather forecast.
 */
-export const getWeather = async (ctx, constCity = undefined) => {
-    let [first, ...rest] = ctx.update.message.text.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1));
-    let cityName = rest.join(' ') || undefined;
+export const getWeather = async (ctx) => {
+    const [first, ...rest] = ctx.update.message.text.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1));
+    const cityName = rest.join(' ') || undefined;
 
     if (!cityName) {
         ctx.reply("Enter city name. Example: /w London");
     }
-
-    try {
-        var weather_data = (await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${process.env.WEATHER_SERVICE_TOKEN}`)).data;
-        console.log(weather_data)
-        if (!weather_data?.main) {
-            var data = weather_data.result[0];
-            ctx.replyWithHTML(messageTemplate(data, cityName));
-        } else {
-            ctx.reply(`No weather data found for ${cityName}`);
+    else {
+        try {
+            const weather_data = await getWeatherService(cityName);
+            if (weather_data?.main) {
+                ctx.replyWithHTML(messageTemplate(weather_data, cityName));
+            } else {
+                ctx.reply(`No weather data found for ${cityName}`);
+            }
+        } catch (e) {
+            console.log(e);
+            ctx.reply("An error occurred while loading data. Try later.")
         }
-    } catch (e) {
-        console.log(e);
-        ctx.reply("An error occurred while loading data. Try later.")
     }
 };
 
