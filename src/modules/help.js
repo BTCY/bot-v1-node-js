@@ -4,23 +4,22 @@
 */
 export const getHelp = (ctx) => {
     ctx.replyWithHTML(`
-Бот поддерживает следущие команды:
+The bot supports the following commands:
 
-<b>ПОГОДА</b>
-/w - погода в Ижевске
-/w_yagul - погода в Ягуле
-/w <i>[город на английском]</i> - погода в выбранном городе
+<b>WEATHER</b> 
+/w <i>[city name in english]</i> - weather in selected city
 
-<b>ТАЙМЕРЫ</b>
-/event - когда следующее событие
-/set_event - установить дату следующего события в формате дд.мм.ггг чч.мм (прим. 31.12.2024 21:00) 
+<b>TIMERS</b>
+/event - when is the next event
+/set_event - set the date of the next event in the format dd.mm.yy hh.mm (note 12/31/2024 21:00)
 
-<b>НОВОСТИ</b>
-/news - список новостей (по умолчанию источник - mail)
-/news <i>[источник]</i> - список новостей с определенного источника
-    r   - rambler
-    m - mail
-/rub - курс рубля
+<b>NEWS</b>
+/news - news list (default source - mail)
+/news <i>[news source]</i> - list of news from a specific source
+    Available news source:
+        r - rambler
+        m - mail
+/rub - ruble's exchange rate
 `)
 };
 
