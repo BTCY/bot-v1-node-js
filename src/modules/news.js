@@ -1,8 +1,8 @@
-import Parser from 'rss-parser';
+import Parser from "rss-parser";
 
 const SOURCES_LIST = {
-    mail: { name: 'mail.ru', url: 'https://news.mail.ru/rss/main/' },
-    rambler: { name: 'rambler.ru', url: 'https://news.rambler.ru/rss/Russia/?limit=20' }
+    mail: { name: "mail.ru", url: "https://news.mail.ru/rss/main/" },
+    rambler: { name: "rambler.ru", url: "https://news.rambler.ru/rss/Russia/?limit=20" }
 };
 
 
@@ -10,7 +10,7 @@ const SOURCES_LIST = {
 *   Get a list of news.
 */
 export const getNewsList = async (ctx) => {
-    let command = ctx.update.message.text.split(' ');
+    let command = ctx.update.message.text.split(" ");
     let sourceName;
     let sourceURL;
 
@@ -19,20 +19,20 @@ export const getNewsList = async (ctx) => {
             sourceName = SOURCES_LIST.mail.name;
             sourceURL = SOURCES_LIST.mail.url;
             break;
-        case 'm':
+        case "m":
             sourceName = SOURCES_LIST.mail.name;
             sourceURL = SOURCES_LIST.mail.url;
             break;
-        case 'r':
+        case "r":
             sourceName = SOURCES_LIST.rambler.name;
             sourceURL = SOURCES_LIST.rambler.url;
             break;
         default:
-            sourceURL = 'error';
+            sourceURL = "error";
             break;
     };
 
-    if (sourceURL === 'error') {
+    if (sourceURL === "error") {
         ctx.replyWithHTML(` 
 Не верно указан источник новостей
 Правильный формат: /news или или /news <i>источник</i> (прим. /news r)
@@ -42,9 +42,9 @@ export const getNewsList = async (ctx) => {
     else {
         let parser = new Parser();
         let news = await parser.parseURL(sourceURL);
-        let newsFeed = '';
+        let newsFeed = "";
         news.items.forEach(item => {
-            newsFeed += `${item.title} - <a href='${item.link}'>читать</a>\n\n`;
+            newsFeed += `${item.title} - <a href="${item.link}">читать</a>\n\n`;
         });
         ctx.replyWithHTML(`
 <b>Новости</b>
