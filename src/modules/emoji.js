@@ -1,15 +1,15 @@
 
-/*
-*   Emoji: like
-*/
+/**
+ *  Emoji: like
+ */
 export const like = (ctx) => {
-    ctx.reply('👍');
+    ctx.reply("👍");
 };
 
 
-/*
-*   The main function of calling emotions.
-*/
+/**
+ *  The main function of calling emotions.
+ */
 export const getEmoji = (ctx) => {
     like(ctx);
 };
