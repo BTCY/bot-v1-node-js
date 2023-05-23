@@ -1,16 +1,20 @@
 import Parser from 'rss-parser';
 
 
-function cutTags(str) {
+/**
+ *  Removing tags.
+ */
+const cutTags = (str) => {
     var regex = /( |<([^>]+)>)/ig,
         result = str.replace(regex, "");
 
     return result;
 }
 
-/*
-*   Get the ruble exchange rate.
-*/
+
+/**
+ *  Get the ruble exchange rate.
+ */
 export const getExchangeRate = async (ctx) => {
     let parser = new Parser();
     let news = await parser.parseURL('https://currr.ru/rss/');

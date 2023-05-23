@@ -1,7 +1,7 @@
 
-/*
-*   Get help for the bot and commands. 
-*/
+/**
+ *  Get help for the bot and commands. 
+ */
 export const getHelp = (ctx) => {
     ctx.replyWithHTML(`
 The bot supports the following commands:
