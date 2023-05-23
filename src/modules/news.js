@@ -1,8 +1,8 @@
 import Parser from "rss-parser";
 
 const SOURCES_LIST = {
-    mail: { name: "mail.ru", url: "https://news.mail.ru/rss/main/" },
-    rambler: { name: "rambler.ru", url: "https://news.rambler.ru/rss/Russia/?limit=20" }
+    cnn: { name: "cnn.com", url: "http://rss.cnn.com/rss/edition_world.rss" },
+    theverge: { name: "theverge.com", url: "https://www.theverge.com/rss/frontpage" }
 };
 
 
@@ -16,16 +16,16 @@ export const getNewsList = async (ctx) => {
 
     switch (command[1]) {
         case undefined:
-            sourceName = SOURCES_LIST.mail.name;
-            sourceURL = SOURCES_LIST.mail.url;
+            sourceName = SOURCES_LIST.theverge.name;
+            sourceURL = SOURCES_LIST.theverge.url;
             break;
-        case "m":
-            sourceName = SOURCES_LIST.mail.name;
-            sourceURL = SOURCES_LIST.mail.url;
+        case "c":
+            sourceName = SOURCES_LIST.cnn.name;
+            sourceURL = SOURCES_LIST.cnn.url;
             break;
-        case "r":
-            sourceName = SOURCES_LIST.rambler.name;
-            sourceURL = SOURCES_LIST.rambler.url;
+        case "v":
+            sourceName = SOURCES_LIST.theverge.name;
+            sourceURL = SOURCES_LIST.theverge.url;
             break;
         default:
             sourceURL = "error";
@@ -34,9 +34,9 @@ export const getNewsList = async (ctx) => {
 
     if (sourceURL === "error") {
         ctx.replyWithHTML(` 
-Не верно указан источник новостей
-Правильный формат: /news или или /news <i>источник</i> (прим. /news r)
-Источники: m - mail.ru, r - rambler
+Invalid news source
+Correct format: /news or /news <i>source</i> (example /news c)
+Sources: c - cnn.com, v - theverge
 `);
     }
     else {
@@ -44,10 +44,10 @@ export const getNewsList = async (ctx) => {
         let news = await parser.parseURL(sourceURL);
         let newsFeed = "";
         news.items.forEach(item => {
-            newsFeed += `${item.title} - <a href="${item.link}">читать</a>\n\n`;
+            newsFeed += `${item.title} - <a href="${item.link}">read</a>\n\n`;
         });
         ctx.replyWithHTML(`
-<b>Новости</b>
+<b>Last news</b>
 
 ${newsFeed}
 ${sourceName} 
