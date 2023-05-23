@@ -17,68 +17,68 @@ bot.start((ctx) => {
     catch (e) { }
 });
 
-/*
-*   --------------------------------------------------
-*/
+/**
+ *   --------------------------------------------------
+ */
 
 
-/*
-*   Get help on bot commands.
-*   Module /modules/help.js
-*/
+/**
+ *   Get help on bot commands.
+ *   Module /modules/help.js
+ */
 bot.command('help', (ctx) => getHelp(ctx))
 
 
-/*
-*   Get the weather forecast.
-*   Module /modules/weather.js
-*/
+/**
+ *   Get the weather forecast.
+ *   Module /modules/weather.js
+ */
 bot.command('w', async (ctx) => await getWeather(ctx));
 
-/*
-*   Get how much time is left before the set event (in setEvent()).
-*   Module /modules/event.js
-*/
+/**
+ *   Get how much time is left before the set event (in setEvent()).
+ *   Module /modules/event.js
+ */
 bot.command('event', (ctx) => getEvent(ctx));
 
-/*
-*   Set the date of the event.
-*   Module /modules/event.js
-*/
+/**
+ *   Set the date of the event.
+ *   Module /modules/event.js
+ */
 bot.command('set_event', (ctx) => setEvent(ctx));
 
 
-/*
-*   Get the news list.
-*   Module /modules/news.js
-*/
+/**
+ *   Get the news list.
+ *   Module /modules/news.js
+ */
 bot.command('news', async (ctx) => await getNewsList(ctx));
 
 
-/*
-*   Get exchange rate of the ruble.
-*   Module /modules/exchangeRate.js
-*/
+/**
+ *   Get exchange rate of the ruble.
+ *   Module /modules/exchangeRate.js
+ */
 bot.command('rub', async (ctx) => await getExchangeRate(ctx));
 
 
-/*
-*   Get the bot's reaction to stickers and emoji.
-*   Module /modules/emoji.js
-*/
+/**
+ *   Get the bot's reaction to stickers and emoji.
+ *   Module /modules/emoji.js
+ */
 bot.on('sticker', (ctx) => getEmoji(ctx));
 
 
-/*
-*   Get the bot's reaction to certain dialogs.
-*   Module /modules/talk.js
-*/
+/**
+ *   Get the bot's reaction to certain dialogs.
+ *   Module /modules/talk.js
+ */
 bot.on('message', (ctx) => getTalk(ctx));
 
 
-/*
-*   --------------------------------------------------
-*/
+/**
+ *   --------------------------------------------------
+ */
 
 bot.launch();
 

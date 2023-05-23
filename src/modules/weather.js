@@ -1,8 +1,8 @@
 import { getWeatherService } from "../api/weather-service";
 
-/*
-*   Template message the weather forecast.
-*/
+/**
+ *   Template message the weather forecast.
+ */
 const messageTemplate = (data, cityName) => {
     return (`
 <b>${cityName} — weather forecast</b> 
@@ -23,9 +23,9 @@ upd: ${new Date(data.dt * 1000).toLocaleString()}
 };
 
 
-/*
-*   Get the weather forecast.
-*/
+/**
+ *   Get the weather forecast.
+ */
 export const getWeather = async (ctx) => {
     const [first, ...rest] = ctx.update.message.text.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1));
     const cityName = rest.join(' ') || undefined;
