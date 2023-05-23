@@ -1,8 +1,8 @@
 import axios from "axios";
-require('dotenv').config();
+require("dotenv").config();
 
 /**
- * @file API: exchange-rates.
+ * @file API: weather.
  * 
  * {@link https://openweathermap.org API}  
  */
@@ -12,12 +12,12 @@ const apikey = process.env.WEATHER_SERVICE_TOKEN;
 
 
 /**
- * Get the converted currency. 
+ * Get weather. 
  * 
  * {@link https://openweathermap.org/current API}  
  * 
- * @param   {string}   from            The three-letter currency code of the currency you would like to convert from. 
- * @return  {IApiConvertedCurrency}    Converted currency
+ * @param   {string}   cityName        City mame
+ * @return  {}                         Result
  */
 export const getWeatherService = (
     cityName,

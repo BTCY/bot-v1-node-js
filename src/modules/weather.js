@@ -27,8 +27,8 @@ upd: ${new Date(data.dt * 1000).toLocaleString()}
  *   Get the weather forecast.
  */
 export const getWeather = async (ctx) => {
-    const [first, ...rest] = ctx.update.message.text.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1));
-    const cityName = rest.join(' ') || undefined;
+    const [first, ...rest] = ctx.update.message.text.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1));
+    const cityName = rest.join(" ") || undefined;
 
     if (!cityName) {
         ctx.reply("Enter city name. Example: /w London");

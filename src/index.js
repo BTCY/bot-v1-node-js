@@ -1,12 +1,12 @@
-require('dotenv').config();
-import { Telegraf } from 'telegraf';
-import { getEvent, setEvent } from './modules/event';
-import { getTalk } from './modules/talk';
-import { getWeather } from './modules/weather';
-import { getHelp } from './modules/help';
-import { getEmoji } from './modules/emoji';
-import { getNewsList } from './modules/news';
-import { getExchangeRate } from './modules/exchangeRate';
+require("dotenv").config();
+import { Telegraf } from "telegraf";
+import { getEvent, setEvent } from "./modules/event";
+import { getTalk } from "./modules/talk";
+import { getWeather } from "./modules/weather";
+import { getHelp } from "./modules/help";
+import { getEmoji } from "./modules/emoji";
+import { getNewsList } from "./modules/news";
+import { getExchangeRate } from "./modules/exchangeRate";
 
 const bot = new Telegraf(process.env.TELEGRAM_TOKEN, {})
 
@@ -26,54 +26,54 @@ bot.start((ctx) => {
  *   Get help on bot commands.
  *   Module /modules/help.js
  */
-bot.command('help', (ctx) => getHelp(ctx))
+bot.command("help", (ctx) => getHelp(ctx))
 
 
 /**
  *   Get the weather forecast.
  *   Module /modules/weather.js
  */
-bot.command('w', async (ctx) => await getWeather(ctx));
+bot.command("w", async (ctx) => await getWeather(ctx));
 
 /**
  *   Get how much time is left before the set event (in setEvent()).
  *   Module /modules/event.js
  */
-bot.command('event', (ctx) => getEvent(ctx));
+bot.command("event", (ctx) => getEvent(ctx));
 
 /**
  *   Set the date of the event.
  *   Module /modules/event.js
  */
-bot.command('set_event', (ctx) => setEvent(ctx));
+bot.command("set_event", (ctx) => setEvent(ctx));
 
 
 /**
  *   Get the news list.
  *   Module /modules/news.js
  */
-bot.command('news', async (ctx) => await getNewsList(ctx));
+bot.command("news", async (ctx) => await getNewsList(ctx));
 
 
 /**
  *   Get exchange rate of the ruble.
  *   Module /modules/exchangeRate.js
  */
-bot.command('rub', async (ctx) => await getExchangeRate(ctx));
+bot.command("rub", async (ctx) => await getExchangeRate(ctx));
 
 
 /**
- *   Get the bot's reaction to stickers and emoji.
+ *   Get the bot"s reaction to stickers and emoji.
  *   Module /modules/emoji.js
  */
-bot.on('sticker', (ctx) => getEmoji(ctx));
+bot.on("sticker", (ctx) => getEmoji(ctx));
 
 
 /**
- *   Get the bot's reaction to certain dialogs.
+ *   Get the bot"s reaction to certain dialogs.
  *   Module /modules/talk.js
  */
-bot.on('message', (ctx) => getTalk(ctx));
+bot.on("message", (ctx) => getTalk(ctx));
 
 
 /**
@@ -83,5 +83,5 @@ bot.on('message', (ctx) => getTalk(ctx));
 bot.launch();
 
 // Enable graceful stop
-process.once('SIGINT', () => bot.stop('SIGINT'));
-process.once('SIGTERM', () => bot.stop('SIGTERM'));
+process.once("SIGINT", () => bot.stop("SIGINT"));
+process.once("SIGTERM", () => bot.stop("SIGTERM"));
